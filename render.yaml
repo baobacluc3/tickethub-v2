@@ -1,0 +1,31 @@
+databases:
+  - name: tickethub-db
+    databaseName: tickethub
+    user: tickethub
+    plan: free
+
+services:
+  - type: web
+    name: tickethub-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /health
+    preDeployCommand: npm run migration:run:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: '3000'
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tickethub-db
+          property: connectionString
+      - key: DB_SSL
+        value: 'true'
+      - key: DB_LOGGING
+        value: 'false'
+      - key: DB_POOL_MAX
+        value: '10'
+      - key: SWAGGER_ENABLED
+        value: 'true'
