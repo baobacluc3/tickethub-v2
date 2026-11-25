@@ -43,6 +43,21 @@ export const envSchema = z.object({
   DB_LOGGING: parseBooleanEnv(false),
   DB_POOL_MAX: z.coerce.number().int().min(1).max(100).default(10),
   SWAGGER_ENABLED: parseBooleanEnv(true),
+  JWT_SECRET: z
+    .string({
+      required_error: 'JWT_SECRET is required',
+      invalid_type_error: 'JWT_SECRET must be a string',
+    })
+    .trim()
+    .min(32, 'JWT_SECRET must be at least 32 characters long'),
+  JWT_EXPIRES_IN: z
+    .string()
+    .trim()
+    .regex(
+      /^\d+(ms|s|m|h|d)$/,
+      'JWT_EXPIRES_IN must be a valid duration such as 15m, 1h, or 900s',
+    )
+    .default('15m'),
 });
 
 export type Env = z.infer<typeof envSchema>;

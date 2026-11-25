@@ -77,6 +77,7 @@ export function configureApp(
         'access-token',
       )
       .addTag('Health', 'Service and database health checks')
+      .addTag('Auth', 'Authentication and registration')
       .build();
 
     const document = SwaggerModule.createDocument(app, swaggerConfig);

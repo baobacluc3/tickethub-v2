@@ -29,3 +29,7 @@ services:
         value: '10'
       - key: SWAGGER_ENABLED
         value: 'true'
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: '15m'
