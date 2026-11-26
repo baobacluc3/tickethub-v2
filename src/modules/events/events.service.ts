@@ -9,6 +9,7 @@ import { EventEntity } from './entities/event.entity';
 import { TicketTierEntity } from './entities/ticket-tier.entity';
 import { EventStatus } from './enums/event-status.enum';
 import { CreateEventDto } from './dto/create-event.dto';
+import { UpdateEventDto } from './dto/update-event.dto';
 
 
 @Injectable()
