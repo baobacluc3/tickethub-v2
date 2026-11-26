@@ -14,11 +14,14 @@ import { LoginDto } from './dto/login.dto';
 import { RegisterResponseDto } from './dto/register-response.dto';
 import { RegisterDto } from './dto/register.dto';
 import { AuthService } from './auth.service';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @Public()
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
@@ -41,6 +44,8 @@ export class AuthController {
     return this.authService.register(dto);
   }
 
+  
+  @Public()
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({

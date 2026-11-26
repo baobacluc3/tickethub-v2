@@ -11,6 +11,12 @@ export class UsersService {
     private readonly usersRepository: Repository<UserEntity>,
   ) {}
 
+  findById(id: string): Promise<UserEntity | null> {
+    return this.usersRepository.findOne({
+      where: { id },
+    });
+  }
+
   findByEmail(email: string): Promise<UserEntity | null> {
     const newEmail = email.trim().toLowerCase();
     const user = this.usersRepository.findOne({
